@@ -23,11 +23,18 @@ sealed class PostgresMinimalDatabaseInfo : PostgresDatabaseInfo
 
     static PostgresType[] CreateTypes(bool withMultiranges)
     {
+        /*
         var builtinTypes = new List<BuiltInPostgresType>();
+
         foreach (var field in typeof(NpgsqlDbType).GetFields())
             if (field.GetCustomAttribute<BuiltInPostgresType>() is { } attr)
+            {
+                System.Console.WriteLine("new(\"" + attr.Name + "\", " + attr.BaseOID.ToString() + ", " + attr.ArrayOID.ToString() + "),");
                 builtinTypes.Add(attr);
+            }
+        */
 
+        var builtinTypes = PostgresMinimalDatabaseInfoStatic.BuiltInTypes();
         var pgTypes = new List<PostgresType>();
         foreach (var attr in builtinTypes)
         {
